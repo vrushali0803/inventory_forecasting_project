@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Orders</title>
+<a href="{{ url_for('distributor.marketplace') }}">⬅ Back to Marketplace</a>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f5f6f8;
+}
+
+.container{
+    max-width:900px;
+    margin:40px auto;
+}
+
+.order-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+.product{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid #eee;
+}
+
+.total{
+    text-align:right;
+    font-weight:bold;
+    margin-top:10px;
+    color:#2e7d32;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>📦 My Orders</h2>
+
+{% if orders|length == 0 %}
+<h3 style="text-align:center;">No orders yet</h3>
+{% endif %}
+
+{% for o in orders %}
+
+<div class="order-card">
+
+<div class="header">
+<span>Order ID: {{ o[0] }}</span>
+<span>{{ o[3].strftime('%d %b %Y, %I:%M %p') }}</span>
+</div>
+
+<div class="product">
+<span>{{ o[4] }}</span>
+<span>Qty: {{ o[5] }}</span>
+</div>
+
+<div class="total">
+Total: ₹ {{ o[1] }}
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

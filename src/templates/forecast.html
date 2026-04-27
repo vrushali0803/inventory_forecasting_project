@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+/* ===== PAGE HEADER ===== */
+.header {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+/* ===== FORM ===== */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+    margin-top: 10px;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #4CAF50, #2e7d32);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ===== RESULT CARD ===== */
+.result-card {
+    background: #f9fdf9;
+    border-left: 6px solid #4CAF50;
+}
+
+/* ===== GRID ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* ===== INSIGHT TEXT ===== */
+.insight {
+    margin-top: 15px;
+    font-style: italic;
+    color: #444;
+}
+</style>
+
+
+<div class="header">📈 Demand Forecast</div>
+
+<div class="card">
+
+  <h2>📈 Demand Forecast</h2>
+
+  <form method="POST" class="form">
+
+    <div class="form-group">
+      <label>Crop</label>
+      <select name="crop_variety">
+        <option value="">Select Crop</option>
+        {% for c in crops %}
+          <option value="{{ c[0] }}|{{ c[1] }}"
+          {% if crop == c[0] and variety == c[1] %}selected{% endif %}>
+            {{ c[0] }} ({{ c[1] }})
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Region</label>
+      <input type="text" name="region" value="{{ region or '' }}" placeholder="Enter region">
+    </div>
+
+    <button class="btn">🚀 Predict Demand</button>
+
+  </form>
+<hr>
+
+<h3>📈 Forecast Result</h3>
+
+{% if prediction %}
+    <p><b>Next Month Prediction:</b> {{ prediction }}</p>
+    <p><b>Insight:</b> {{ insight }}</p>
+{% endif %}
+
+</div>
+
+{% if prediction is not none %}
+<div class="card result-card">
+
+  <h3>📊 Prediction Summary</h3>
+
+  <div class="grid">
+    <div><strong>Crop:</strong> {{ crop }}</div>
+    <div><strong>Variety:</strong> {{ variety }}</div>
+    <div><strong>Region:</strong> {{ region }}</div>
+    <div><strong>Demand:</strong> {{ prediction }}</div>
+  </div>
+
+  <p class="insight">💡 {{ insight }}</p>
+
+</div>
+{% endif %}
+
+{% endblock %}

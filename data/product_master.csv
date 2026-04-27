@@ -1,0 +1,8 @@
+crop,variety,seed_type,season,packing_size,token_amount_per_qtl,return_policy,notes
+Soybean,JS-335,CF,Kharif,30 kg,1000,No,"Medium duration, suitable for black soil, good oil content"
+Soybean,KDS-726,CF,Kharif,30 kg,1100,No,"High yielding, suitable for medium rainfall areas"
+Maize,MAUS-612,TL,Kharif,20 kg,900,Yes,"Early maturity, suitable for loamy soil"
+Maize,PHULE SAMPADA,TL,Kharif,20 kg,950,Yes,"Good tolerance to moisture stress"
+Wheat,HD-2967,TL,Rabi,40 kg,800,Yes,"Widely adapted, suitable for irrigated conditions"
+Onion,Bhima Red,TL,Rabi,10 kg,1200,Yes,"Good storage quality, suitable for dry climate"
+Lentils,JL-3,TL,Rabi,30 kg,700,Yes,"Medium duration, suitable for light soils"

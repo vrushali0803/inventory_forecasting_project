@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Orders</title>
+
+<style>
+body{font-family:Arial;background:#f5f5f5;}
+.container{max-width:800px;margin:40px auto;}
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>📦 Your Orders</h2>
+
+{% for order in orders %}
+<div class="card">
+Order ID: {{ order[0] }} <br>
+Total: ₹ {{ order[2] }} <br>
+Date: {{ order[3] }}
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

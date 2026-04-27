@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BeejMitra</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f5f6f8;
+    display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background: #1b5e20;
+    color: white;
+    height: 100vh;
+    padding-top: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background: #2e7d32;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* HEADER */
+.header {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* FULL WIDTH CARD */
+.full-width {
+    grid-column: span 2;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* FIX CHART SIZE */
+.card canvas {
+    width: 100% !important;
+    height: 300px !important;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>🌱 BeejMitra</h2>
+
+<a href="{{ url_for('admin.admin_dashboard') }}">🏠 Dashboard</a>
+<a href="{{ url_for('admin.analytics') }}">📊 Analytics</a>
+<a href="{{ url_for('admin.forecast') }}">📈 Forecast</a>
+<a href="{{ url_for('admin.recommendation') }}">📊 Recommendation</a>
+<a href="{{ url_for('admin.view_orders') }}">📦 Orders</a>
+<a href="{{ url_for('admin.profit') }}">💰 Profit</a>
+<a href="{{ url_for('admin.risk') }}">⚠️ Risk</a>
+<a href="{{ url_for('auth.logout') }}">🚪 Logout</a>
+</div>
+
+<div class="main">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

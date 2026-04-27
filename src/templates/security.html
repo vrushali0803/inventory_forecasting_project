@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Security</title>
+<a href="{{ url_for('distributor.marketplace') }}">⬅ Back to Marketplace</a>
+
+<style>
+body{
+font-family:Arial;
+background:#f5f6f8;
+}
+
+.container{
+max-width:400px;
+margin:60px auto;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#1f7a3d;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🔒 Change Password</h2>
+
+<form method="POST">
+<input type="password" name="password" placeholder="New Password">
+<button type="submit">Update Password</button>
+</form>
+
+</div>
+
+</body>
+</html>

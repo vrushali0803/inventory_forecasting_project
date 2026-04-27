@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f6f7f8;
+}
+
+.container{
+    max-width:900px;
+    margin:40px auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.card:hover{
+    transform: scale(1.03);
+    transition: 0.3s;
+}
+
+button{
+    transition:0.3s;
+}
+button:hover{
+    background:#1b5e20;
+}
+
+.left{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.left img{
+    width:70px;
+    height:70px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.price{
+    color:#2e7d32;
+    font-weight:bold;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.qty a{
+    text-decoration:none;
+    font-size:18px;
+    padding:5px 10px;
+    background:#eee;
+    border-radius:6px;
+}
+
+.remove{
+    color:red;
+    text-decoration:none;
+    font-size:18px;
+}
+
+.btn{
+    background:#2e7d32;
+    color:white;
+    padding:10px 20px;
+    border-radius:6px;
+    text-decoration:none;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🛒 Your Cart</h2>
+
+
+{% for item in items %}
+
+<div class="card">
+
+    <div class="left">
+        <img src="{{ url_for('static', filename=item[5]) }}">
+        <div>
+            <b>{{ item[1] }}</b><br>
+            <small>{{ item[2] }}</small>
+        </div>
+    </div>
+
+    <div class="qty">
+        <a href="{{ url_for('distributor.update_cart', product_id=item[0], action='dec') }}">➖</a>
+
+        <b>{{ item[4] }}</b>
+        <a href="{{ url_for('distributor.update_cart', product_id=item[0], action='inc') }}">➕</a>
+    </div>
+
+    <div>
+        ₹ {{ item[3] }} × {{ item[4] }}
+    </div>
+
+    <!-- ✅ FIXED CALCULATION -->
+    <div class="price">
+        ₹ {{ item[3] * item[4] }}
+    </div>
+
+    <a class="remove" href="{{ url_for('distributor.remove_from_cart', item_id=item[0]) }}">❌</a>
+
+</div>
+
+{% if items|length == 0 %}
+<h3 style="text-align:center;">🛒 Your cart is empty</h3>
+{% endif %}
+
+{% endfor %}
+
+<h3>Total: ₹ {{ total }}</h3>
+
+<a href="{{ url_for('distributor.checkout') }}" class="btn">Proceed to Checkout</a>
+
+</div>
+
+</body>
+</html>

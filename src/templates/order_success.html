@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Success</title>
+<style>
+body{
+font-family:Arial;
+text-align:center;
+padding-top:100px;
+background:#f6f7f8;
+}
+
+.box{
+background:white;
+padding:40px;
+border-radius:12px;
+display:inline-block;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+a{
+display:inline-block;
+margin-top:20px;
+padding:10px 20px;
+background:#2e7d32;
+color:white;
+text-decoration:none;
+border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>✅ Order Placed Successfully</h2>
+<p>Your order has been placed.</p>
+<a href="{{ url_for('distributor.marketplace') }}">Back to Home</a>
+</div>
+
+</body>
+</html>

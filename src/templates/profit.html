@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profit Estimation</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #2ecc71;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        tr:hover {
+            background: #eafaf1;
+        }
+
+        .profit {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .revenue {
+            color: #2c3e50;
+        }
+
+        .margin {
+            color: #16a085;
+            font-weight: bold;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            background: #2ecc71;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>💰 Profit Estimation</h2>
+    <div class="badge">Business Insights</div>
+</div>
+
+<div class="card">
+
+<table>
+<tr>
+<th>Crop</th>
+<th>Variety</th>
+<th>Demand</th>
+<th>Revenue</th>
+<th>Profit</th>
+<th>Margin %</th>
+</tr>
+
+{% for item in data %}
+<tr>
+<td>{{ item.crop }}</td>
+<td>{{ item.variety }}</td>
+<td>{{ item.demand }}</td>
+
+<td class="revenue">₹ {{ "{:,}".format(item.revenue) }}</td>
+
+<td class="profit">₹ {{ "{:,}".format(item.profit) }}</td>
+
+<td class="margin">{{ item.margin }}%</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

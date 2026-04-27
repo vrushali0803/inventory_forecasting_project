@@ -1,0 +1,4 @@
+order_id,buyer_type,buyer_name,region,crop,variety,season,quantity_quintal,booking_date
+ORD0001,Distributor,Test Distributor,Region-A,Soybean,JS-335,Kharif,500,2026-02-05
+ORD0002,Distributor,Demo Distributor,Region-A,Soybean,JS-335,Kharif,400,2026-02-05
+ORD0003,Distributor,ganesh agro services,akole,maize,ADITYA- PHULE SANGAM (KDS 726)- CF,Kharif,5,2026-02-05

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Risk Indicators</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f6fa;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #2ecc71;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .high { color: red; font-weight: bold; }
+        .low { color: orange; }
+        .safe { color: green; }
+
+    </style>
+</head>
+
+<body>
+
+<h2>⚠️ Risk Indicators</h2>
+
+<table>
+<tr>
+<th>Crop</th>
+<th>Variety</th>
+<th>Demand</th>
+<th>Status</th>
+<th>Severity</th>
+<th>Score</th>
+<th>Action</th>
+</tr>
+
+{% for item in data %}
+<tr>
+<td>{{ item.crop }}</td>
+<td>{{ item.variety }}</td>
+<td>{{ item.demand }}</td>
+<td>{{ item.severity }}</td>
+<td>{{ item.score }}</td>
+<td>{{ item.action }}</td>
+
+<td class="
+    {% if 'Overstock' in item.status %}high
+    {% elif 'Shortage' in item.status %}low
+    {% else %}safe
+    {% endif %}
+">
+    {{ item.status }}
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>

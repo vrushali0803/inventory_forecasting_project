@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="header">📦 Orders Management</div>
+
+<div class="card">
+
+    <h2>📦 Orders Management</h2>
+
+    {% if orders %}
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Distributor ID</th>
+            <th>Total (₹)</th>
+            <th>Region</th>
+            <th>Date</th>
+            <th>Product</th>
+        </tr>
+
+        {% for o in orders %}
+        <tr>
+           <td>{{ o[0] }}</td>  <!-- ID -->
+           <td>{{ o[1] }}</td>  <!-- Distributor -->
+           <td>₹ {{ o[3] }}</td>  <!-- Total -->
+           <td>{{ o[4] or 'N/A' }}</td>  <!-- Region -->
+           <td>{{ o[5].strftime('%d %b %Y, %I:%M %p') }}</td>  <!-- Date -->
+           <td>{{ o[2] or 'N/A' }}</td>  <!-- Product -->
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+        <p class="no-data">🚫 No orders available</p>
+
+    {% endif %}
+
+</div>
+
+<style>
+
+/* Container */
+.card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-top: 20px;
+}
+
+/* Header */
+.header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th {
+    background: #2e7d32;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Hover effect */
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* No data message */
+.no-data {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+    padding: 20px;
+}
+
+</style>
+
+{% endblock %}

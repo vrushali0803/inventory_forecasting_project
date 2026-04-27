@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>📊 Production Recommendations</h2>
+
+<div class="card">
+
+<table>
+    <tr>
+        <th>Crop</th>
+        <th>Variety</th>
+        <th>Demand</th>
+        <th>Recommendation</th>
+        <th>Reason</th>
+        <th>Season</th>
+        
+    </tr>
+
+    {% for item in data %}
+    <tr>
+        <td>{{ item.crop }}</td>
+        <td>{{ item.variety }}</td>
+        <td>{{ item.demand }}</td>
+        <td>{{ item.action }}</td>
+        <td>{{ item.reason }}</td>
+        <td>{{ item.season }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</div>
+
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #2e7d32;
+    color: white;
+}
+</style>
+
+{% endblock %}

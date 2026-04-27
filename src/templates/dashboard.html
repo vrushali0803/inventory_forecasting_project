@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="header">Dashboard</div>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>📦 Orders</h3>
+        <p>{{ total_orders }}</p>
+    </div>
+
+    <div class="card">
+        <h3>💰 Revenue</h3>
+        <p>₹ {{ total_revenue }}</p>
+    </div>
+
+    <div class="card">
+        <h3>🌾 Demand</h3>
+        <p>{{ total_demand }}</p>
+    </div>
+
+    <div class="card">
+        <h3>🏆 Top Crop</h3>
+        <p>{{ top_crop }}</p>
+    </div>
+
+</div>
+
+{% endblock %}

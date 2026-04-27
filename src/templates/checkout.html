@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Checkout</title>
+</head>
+<body style="font-family:Arial;text-align:center">
+
+<h2>Select Payment Method</h2>
+
+<form action="{{ url_for('distributor.place_order') }}" method="POST">
+
+<input type="radio" name="payment" checked> UPI <br>
+<input type="radio" name="payment"> Card <br>
+<input type="radio" name="payment"> Cash on Delivery <br><br>
+
+<button type="submit">Pay & Place Order</button>
+
+</form>
+
+</body>
+</html>

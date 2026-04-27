@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BeejMitra 🌱</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f6f7f8;
+}
+
+/* HEADER */
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 40px;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.logo{
+font-size:26px;
+font-weight:bold;
+color:#2e7d32;
+}
+
+/* SEARCH */
+.search input{
+padding:8px 14px;
+border-radius:20px;
+border:1px solid #ccc;
+width:260px;
+}
+
+/* RIGHT SECTION */
+.right{
+display:flex;
+gap:20px;
+align-items:center;
+}
+
+/* CART */
+.cart{
+position:relative;
+cursor:pointer;
+}
+
+.badge{
+position:absolute;
+top:-5px;
+right:-10px;
+background:red;
+color:white;
+font-size:11px;
+padding:2px 6px;
+border-radius:50%;
+}
+
+/* PROFILE */
+.profile{
+cursor:pointer;
+position:relative;
+}
+
+.dropdown{
+display:none;
+position:absolute;
+right:0;
+top:30px;
+background:white;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+border-radius:10px;
+padding:10px;
+width:180px;
+}
+
+.dropdown a{
+display:block;
+padding:6px;
+text-decoration:none;
+color:black;
+}
+
+.profile:hover .dropdown{
+display:block;
+}
+
+/* TAGLINE (MOVING) */
+.tagline{
+background:#2e7d32;
+color:white;
+overflow:hidden;
+white-space:nowrap;
+}
+
+.tagline span{
+display:inline-block;
+padding:6px;
+animation:scroll 10s linear infinite;
+}
+
+@keyframes scroll{
+0%{transform:translateX(100%);}
+100%{transform:translateX(-100%);}
+}
+
+/* CATEGORY CENTERED */
+.categories-icons{
+display:flex;
+justify-content:center;
+gap:25px;
+padding:20px;
+flex-wrap:wrap;
+}
+
+.cat-icon{
+text-align:center;
+cursor:pointer;
+padding:10px;
+border-radius:50%;
+background:white;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+transition:0.3s;
+width:90px;
+height:90px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.cat-icon img{
+width:50px;
+height:50px;
+border-radius:12%;
+object-fit:cover;
+}
+
+.cat-icon p{
+margin:5px 0 0;
+font-size:12px;
+}
+
+.cat-icon.active{
+background:#2e7d32;
+color:white;
+}
+
+/* GRID */
+.container{
+padding:20px 40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+/* CARD */
+.card{
+background:white;
+padding:12px;
+border-radius:14px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 12px 24px rgba(0,0,0,0.12);
+}
+
+.card img{
+width:100%;
+height:150px;
+border-radius:10px;
+object-fit:cover;
+}
+
+.title{
+display:flex;
+justify-content:space-between;
+font-weight:600;
+margin-top:8px;
+}
+
+.price{
+text-align:center;
+color:#2e7d32;
+font-weight:bold;
+margin:6px 0;
+}
+
+/* BUTTON */
+.add-btn{
+width:100%;
+padding:8px;
+border:none;
+background:#2e7d32;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* QTY */
+.qty-box{
+display:none;
+justify-content:center;
+gap:10px;
+margin-bottom:6px;
+}
+
+.qty-box button{
+background:#2e7d32;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:5px;
+}
+
+/* MENU BUTTON */
+.menu-btn{
+font-size:20px;
+cursor:pointer;
+}
+
+/* ===== PREMIUM SIDEBAR ===== */
+
+#sidebar{
+    position:fixed;
+    top:0;
+    right:-300px;
+    width:280px;
+    height:100%;
+    background:#ffffff;
+    box-shadow:-4px 0 20px rgba(0,0,0,0.15);
+    transition:0.3s ease;
+    z-index:1000;
+    border-radius:12px 0 0 12px;
+    padding:10px 0;
+}
+
+#sidebar.active{
+    right:0;
+}
+
+/* Header */
+#sidebar h3{
+    padding:15px 20px;
+    border-bottom:1px solid #eee;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* Links */
+#sidebar a{
+    display:block;
+    padding:14px 20px;
+    text-decoration:none;
+    color:#333;
+    font-size:15px;
+    transition:0.2s;
+}
+
+#sidebar a:hover{
+    background:#f5f5f5;
+    color:#2e7d32;
+}
+
+/* Logout special */
+#sidebar a:last-child{
+    border-top:1px solid #eee;
+    margin-top:10px;
+}
+<div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+/* OVERLAY */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.3);
+    display:none;
+    z-index:999;
+}
+
+.overlay.active{
+    display:block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+<div class="logo">🌱 BeejMitra</div>
+
+<div class="search">
+<input type="text" placeholder="Search..." onkeyup="searchProduct(this.value)">
+</div>
+
+<div class="right">
+
+<div class="cart" onclick="window.location.href='{{ url_for('distributor.view_cart') }}'">
+<i class="fa fa-shopping-cart"></i>
+<span class="badge">{{ cart_count }}</span>
+</div>
+
+<div class="menu-btn" onclick="openSidebar()">
+<i class="fa fa-bars"></i>
+</div>
+
+</div>
+
+<div id="sidebar" class="sidebar">
+
+<div class="sidebar-header">
+<span>👤 My Account</span>
+<i class="fa fa-times" onclick="closeSidebar()"></i>
+</div>
+
+<a href="{{ url_for('distributor.orders') }}">📦 Order History</a>
+<a href="{{ url_for('distributor.security') }}">🔐 Security</a>
+<a href="{{ url_for('distributor.help_page') }}">❓ Help</a>
+<a href="{{ url_for('distributor.delete_account') }}">⚠ Delete Account</a>
+
+<hr>
+
+<a href="{{ url_for('auth.logout') }}">🚪 Logout</a>
+
+</div>
+
+<div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+</div>
+
+<!-- TAGLINE -->
+<div class="tagline">
+<span>🌱 High Yield Seeds | Smart Farming Starts Here | BeejMitra 🌾</span>
+</div>
+
+<!-- CATEGORY -->
+<div class="categories-icons">
+
+<div class="cat-icon active" onclick="setCategory(this,'all')">
+<img src="/static/products/wheat.jpg">
+<p>All</p>
+</div>
+
+<div class="cat-icon" onclick="setCategory(this,'field crops')">
+<img src="/static/products/cotton.jpg">
+<p>Field Crops</p>
+</div>
+
+<div class="cat-icon" onclick="setCategory(this,'vegetables')">
+<img src="/static/products/onion.jpg">
+<p>Vegetables</p>
+</div>
+
+<div class="cat-icon" onclick="setCategory(this,'fruits')">
+<img src="/static/products/watermelon.jpg">
+<p>Fruits</p>
+</div>
+
+<div class="cat-icon" onclick="setCategory(this,'flowers')">
+<img src="/static/products/rose.jpg">
+<p>Flowers</p>
+</div>
+
+</div>
+
+<!-- GRID -->
+<div class="container">
+<div class="grid">
+
+{% for product in products %}
+
+<div class="card" data-category="{{ product.category }}">
+
+<img src="{{ url_for('static', filename=product.image_path) }}">
+
+<div class="title">
+<span>{{ product.variety }}</span>
+<span>{{ product.crop }}</span>
+</div>
+
+<div class="price">₹ {{ product.price }}</div>
+
+<form method="POST" action="{{ url_for('distributor.add_to_cart') }}">
+
+<input type="hidden" name="product_id" value="{{ product.id }}">
+<input type="hidden" name="quantity" value="1" class="qty">
+
+<button type="button" class="add-btn" onclick="addItem(this)">Add</button>
+
+<div class="qty-box">
+<button type="button" onclick="changeQty(this,-1)">-</button>
+<span>1</span>
+<button type="button" onclick="changeQty(this,1)">+</button>
+<button type="submit" style="background:#ff9800;border:none;padding:5px 10px;border-radius:5px;color:white;">✔</button>
+</div>
+
+</form>
+
+</div>
+
+{% endfor %}
+
+</div>
+</div>
+
+<script>
+
+function addItem(btn){
+btn.style.display="none";
+let box=btn.parentElement.querySelector(".qty-box");
+box.style.display="flex";
+}
+
+function changeQty(btn,change){
+let span=btn.parentElement.querySelector("span");
+let val=parseInt(span.innerText)+change;
+
+if(val<=0){
+btn.parentElement.style.display="none";
+btn.closest("form").querySelector(".add-btn").style.display="block";
+return;
+}
+
+span.innerText=val;
+btn.closest("form").querySelector(".qty").value=val;
+}
+
+function setCategory(el,cat){
+document.querySelectorAll(".cat-icon").forEach(c=>c.classList.remove("active"));
+el.classList.add("active");
+
+document.querySelectorAll(".card").forEach(c=>{
+let category=c.getAttribute("data-category");
+
+if(cat==="all" || category===cat){
+c.style.display="block";
+}else{
+c.style.display="none";
+}
+});
+}
+
+function searchProduct(val){
+document.querySelectorAll(".card").forEach(c=>{
+c.style.display=c.innerText.toLowerCase().includes(val.toLowerCase())?"block":"none";
+});
+}
+
+function openSidebar(){
+    document.getElementById("sidebar").classList.add("active");
+    document.getElementById("overlay").classList.add("active");
+}
+
+function closeSidebar(){
+    document.getElementById("sidebar").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
+}
+</script>
+
+
+</body>
+</html>
