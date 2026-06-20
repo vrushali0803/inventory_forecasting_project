@@ -62,6 +62,7 @@ def distributor_login():
 
         if user and user[2] == password:
             session['user_id'] = user[0]
+            session['username'] = user[1]
             session['role'] = user[3]
 
             return redirect(url_for('distributor.marketplace'))
@@ -71,6 +72,52 @@ def distributor_login():
 
     return render_template('distributor_login.html')
 
+
+# ================= DISTRIBUTOR SIGNUP =================
+@auth_bp.route('/distributor-signup', methods=['GET', 'POST'])
+def distributor_signup():
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        confirm_password = request.form.get('confirm_password')
+        email = request.form['email']
+        region = request.form['region']
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        # 🔒 Username check
+        cur.execute("SELECT id FROM users WHERE username=%s", (username,))
+        if cur.fetchone():
+            cur.close()
+            conn.close()
+            return render_template("distributor_signup.html", error_field="username")
+
+        # 🔒 Password validation
+        if password != confirm_password:
+            cur.close()
+            conn.close()
+            return render_template("distributor_signup.html", error_field="confirm_password")
+
+        if len(password) < 8:
+            cur.close()
+            conn.close()
+            return render_template("distributor_signup.html", error_field="password")
+
+        # 🔥 INSERT USER
+        cur.execute("""
+            INSERT INTO users (username, password, email, role, region)
+            VALUES (%s, %s, %s, 'distributor', %s)
+        """, (username, password, email, region))
+
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return redirect(url_for('auth.distributor_login'))
+
+    return render_template("distributor_signup.html")
 
 # ================= LOGOUT =================
 @auth_bp.route('/logout')

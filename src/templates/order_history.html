@@ -14,6 +14,23 @@ margin-bottom:15px;
 border-radius:10px;
 box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
+.back-btn{
+    display:inline-block;
+    background:#2e7d32;
+    color:white;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:600;
+    margin-bottom:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    background:#1b5e20;
+}
+
 </style>
 
 </head>
@@ -22,7 +39,13 @@ box-shadow:0 3px 10px rgba(0,0,0,0.1);
 
 <div class="container">
 
-<h2>📦 Your Orders</h2>
+<a href="{{ url_for('distributor.marketplace') }}" class="back-btn">
+    🏠 Back to Dashboard
+</a>
+
+<h2 style="margin-bottom:20px;color:#2e7d32;">
+📦 Order History
+</h2>
 
 {% for order in orders %}
 <div class="card">

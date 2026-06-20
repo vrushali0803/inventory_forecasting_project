@@ -96,7 +96,10 @@ body {
 <a href="{{ url_for('admin.view_orders') }}">📦 Orders</a>
 <a href="{{ url_for('admin.profit') }}">💰 Profit</a>
 <a href="{{ url_for('admin.risk') }}">⚠️ Risk</a>
-<a href="{{ url_for('auth.logout') }}">🚪 Logout</a>
+<a href="#"
+onclick="confirmLogout()">
+    Logout
+</a>
 </div>
 
 <div class="main">
@@ -104,4 +107,16 @@ body {
 </div>
 
 </body>
+<script>
+
+function confirmLogout(){
+
+    if(confirm("Are you sure you want to logout?")){
+        window.location.href =
+        "{{ url_for('auth.logout') }}";
+    }
+
+}
+
+</script>
 </html>

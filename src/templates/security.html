@@ -1,56 +1,201 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>Security</title>
-<a href="{{ url_for('distributor.marketplace') }}">⬅ Back to Marketplace</a>
+<title>Security Settings</title>
 
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
-font-family:Arial;
-background:#f5f6f8;
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
 }
 
 .container{
-max-width:400px;
-margin:60px auto;
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    max-width:600px;
+    margin:50px auto;
+    padding:20px;
 }
 
-input{
-width:100%;
-padding:10px;
-margin:10px 0;
-border-radius:6px;
-border:1px solid #ccc;
+.back-btn{
+    display:inline-block;
+    background:#2e7d32;
+    color:white;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:600;
+    margin-bottom:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
 }
 
-button{
-width:100%;
-padding:10px;
-background:#1f7a3d;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
+.back-btn:hover{
+    background:#1b5e20;
 }
+
+.security-card{
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.security-header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.security-icon{
+    font-size:60px;
+    margin-bottom:10px;
+}
+
+.security-header h2{
+    color:#2e7d32;
+    margin-bottom:8px;
+}
+
+.security-header p{
+    color:#777;
+}
+
+.field{
+    margin-bottom:20px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    color:#444;
+}
+
+.field input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+}
+
+.field input:focus{
+    outline:none;
+    border-color:#43a047;
+    box-shadow:0 0 5px rgba(67,160,71,0.3);
+}
+
+.password-info{
+    background:#f8f9fa;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+    border-left:4px solid #43a047;
+}
+
+.password-info ul{
+    margin-left:20px;
+    margin-top:10px;
+}
+
+.update-btn{
+    width:100%;
+    padding:14px;
+    background:linear-gradient(135deg,#2e7d32,#43a047);
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.update-btn:hover{
+    background:#1b5e20;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<h2>🔒 Change Password</h2>
+<a href="{{ url_for('distributor.marketplace') }}" class="back-btn">
+🏠 Back to Dashboard
+</a>
+
+<div class="security-card">
+
+<div class="security-header">
+
+<div class="security-icon">
+🔒
+</div>
+
+<h2>Security Settings</h2>
+
+<p>Update your account password securely</p>
+
+</div>
+
+<div class="password-info">
+
+<strong>Password Requirements</strong>
+
+<ul>
+<li>Minimum 8 characters</li>
+<li>Use letters and numbers</li>
+<li>Keep your password private</li>
+</ul>
+
+</div>
 
 <form method="POST">
-<input type="password" name="password" placeholder="New Password">
-<button type="submit">Update Password</button>
+
+<div class="field">
+<label>Current Password</label>
+<input
+type="password"
+name="current_password"
+placeholder="Enter current password"
+required>
+</div>
+
+<div class="field">
+<label>New Password</label>
+<input
+type="password"
+name="new_password"
+placeholder="Enter new password"
+required>
+</div>
+
+<div class="field">
+<label>Confirm Password</label>
+<input
+type="password"
+name="confirm_password"
+placeholder="Confirm new password"
+required>
+</div>
+
+<button type="submit" class="update-btn">
+🔐 Update Password
+</button>
+
 </form>
+
+</div>
 
 </div>
 
 </body>
 </html>
+

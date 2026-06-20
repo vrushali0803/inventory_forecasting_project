@@ -1,0 +1,514 @@
+<!-- CHATBOT BUTTON -->
+<div id="chatbot-btn" onclick="toggleChat()">
+    💬
+</div>
+
+<!-- CHATBOX -->
+<div id="chatbox">
+
+    <div class="chat-header">
+        🤖 BeejMitra AI Assistant
+        <span class="close-btn" onclick="toggleChat()">✖</span>
+    </div>
+
+    <div id="chat-messages"></div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+
+        <button onclick="quickMsg('inventory')">
+            📦 Inventory
+        </button>
+        <button onclick="quickMsg('show flowers')">
+            🌸 Flowers
+        </button>
+
+        <button onclick="quickMsg('show fruits')">
+            🍎 Fruits
+        </button>
+
+        <button onclick="quickMsg('show kharif crops')">
+           🌾 Kharif
+        </button>
+
+        <button onclick="quickMsg('what should i stock')">
+            📈 Forecast
+        </button>
+
+        <button onclick="quickMsg('cheapest crop')">
+            💰 Cheapest
+        </button>
+
+        <button onclick="quickMsg('best selling crop')">
+            🏆 Best Seller
+        </button>
+
+    </div>
+
+    <div class="chat-input">
+
+        <input
+            id="chat-input"
+            placeholder="Ask about crops, prices, demand..."
+        >
+
+        <button onclick="sendMsg()">
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+<style>
+
+/* ==========================
+   CHATBOT BUTTON
+========================== */
+
+#chatbot-btn{
+
+    position:fixed;
+    bottom:25px;
+    right:25px;
+
+    width:65px;
+    height:65px;
+
+    background:linear-gradient(
+        135deg,
+        #2e7d32,
+        #43a047
+    );
+
+    color:white;
+    font-size:28px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+    cursor:pointer;
+
+    box-shadow:0 8px 25px rgba(0,0,0,0.25);
+
+    z-index:9999;
+
+    transition:all .3s ease;
+}
+
+#chatbot-btn:hover{
+    transform:scale(1.08);
+}
+
+/* ==========================
+   CHATBOX
+========================== */
+
+#chatbox{
+
+    display:none;
+
+    position:fixed;
+
+    bottom:100px;
+    right:20px;
+
+    width:420px;
+    height:600px;
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,0.25);
+
+    z-index:9999;
+
+    flex-direction:column;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.chat-header{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2e7d32,
+        #43a047
+    );
+
+    color:white;
+
+    padding:15px;
+
+    font-size:16px;
+    font-weight:600;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.close-btn{
+    cursor:pointer;
+}
+
+/* ==========================
+   CHAT AREA
+========================== */
+
+#chat-messages{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:15px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:10px;
+
+    background:#fafafa;
+}
+
+/* ==========================
+   USER MESSAGE
+========================== */
+
+.user-msg{
+
+    align-self:flex-end;
+
+    background:#dcedc8;
+
+    padding:10px 14px;
+
+    border-radius:15px;
+
+    max-width:80%;
+
+    word-wrap:break-word;
+}
+
+/* ==========================
+   BOT MESSAGE
+========================== */
+
+.bot-msg{
+
+    align-self:flex-start;
+
+    background:#f1f1f1;
+
+    padding:10px 14px;
+
+    border-radius:15px;
+
+    max-width:80%;
+
+    white-space:pre-wrap;
+
+    word-wrap:break-word;
+}
+
+/* ==========================
+   QUICK ACTIONS
+========================== */
+
+.quick-actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    padding:10px;
+
+    border-top:1px solid #eee;
+
+    background:white;
+}
+
+.quick-actions button{
+
+    border:none;
+
+    background:#e8f5e9;
+
+    padding:8px 12px;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    transition:.2s;
+}
+
+.quick-actions button:hover{
+
+    background:#c8e6c9;
+}
+
+/* ==========================
+   INPUT
+========================== */
+
+.chat-input{
+
+    display:flex;
+
+    border-top:1px solid #ddd;
+
+    background:white;
+}
+
+.chat-input input{
+
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    outline:none;
+
+    font-size:14px;
+}
+
+.chat-input button{
+
+    background:#2e7d32;
+
+    color:white;
+
+    border:none;
+
+    width:60px;
+
+    cursor:pointer;
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:600px){
+
+    #chatbox{
+
+        width:95%;
+        height:75%;
+
+        right:2.5%;
+        bottom:90px;
+    }
+
+}
+
+</style>
+
+<script>
+
+/* ==========================
+   TOGGLE CHAT
+========================== */
+function toggleChat(){
+
+    let box =
+    document.getElementById("chatbox");
+
+    if(
+        box.style.display === "none" ||
+        box.style.display === ""
+    ){
+        box.style.display = "flex";
+    }
+    else{
+        box.style.display = "none";
+    }
+}
+/* ==========================
+   QUICK BUTTONS
+========================== */
+
+function quickMsg(msg){
+
+    document.getElementById(
+        "chat-input"
+    ).value = msg;
+
+    sendMsg();
+}
+
+/* ==========================
+   SEND MESSAGE
+========================== */
+
+function sendMsg(){
+
+    let input =
+    document.getElementById(
+        "chat-input"
+    );
+
+    let msg =
+    input.value.trim();
+
+    if(!msg) return;
+
+    let chat =
+    document.getElementById(
+        "chat-messages"
+    );
+
+    chat.innerHTML +=
+    `<div class="user-msg">${msg}</div>`;
+
+    let loadingId =
+    Date.now();
+
+    chat.innerHTML +=
+    `<div class="bot-msg" id="loading-${loadingId}">
+    🤖 Thinking...
+    </div>`;
+
+    chat.scrollTop =
+    chat.scrollHeight;
+
+    fetch(
+        "/distributor/chatbot",
+        {
+            method:"POST",
+
+            headers:{
+                "Content-Type":
+                "application/json"
+            },
+
+            body:JSON.stringify({
+                message:msg
+            })
+        }
+    )
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        let loading =
+        document.getElementById(
+            `loading-${loadingId}`
+        );
+
+        if(loading){
+            loading.remove();
+        }
+
+        chat.innerHTML +=
+        `<div class="bot-msg">
+        ${data.reply}
+        </div>`;
+
+        chat.scrollTop =
+        chat.scrollHeight;
+    })
+
+    .catch(()=>{
+
+        chat.innerHTML +=
+        `<div class="bot-msg">
+        ⚠️ Server Error
+        </div>`;
+    });
+
+    input.value="";
+}
+
+/* ==========================
+   PAGE LOAD
+========================== */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+    let chat =
+    document.getElementById(
+        "chat-messages"
+    );
+
+    chat.innerHTML =
+    `
+    <div class="bot-msg">
+
+👋 Welcome to BeejMitra AI
+
+I can help with:
+
+🌾 Crop Information
+💰 Product Prices
+📦 Inventory Analysis
+📈 Demand Forecasting
+🏆 Sales Analytics
+
+Try:
+
+• Price of Rose
+• Show Flowers
+• Show Fruits
+• Show Kharif Crops
+• Cheapest Crop
+• Best Selling Crop
+• What Should I Stock?
+
+    </div>
+    `;
+
+    if(
+        sessionStorage.getItem(
+            "chatbotOpened"
+        ) !== "true"
+    ){
+
+        setTimeout(function(){
+
+            document.getElementById(
+                "chatbox"
+            ).style.display = "flex";
+
+            sessionStorage.setItem(
+                "chatbotOpened",
+                "true"
+            );
+
+        },3000);
+    }
+
+    document
+    .getElementById(
+        "chat-input"
+    )
+    .addEventListener(
+        "keypress",
+        function(e){
+
+            if(e.key==="Enter"){
+                sendMsg();
+            }
+        }
+    );
+});
+</script>

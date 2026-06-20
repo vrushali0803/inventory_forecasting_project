@@ -1,68 +1,179 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Help</title>
-<a href="{{ url_for('distributor.marketplace') }}">⬅ Back to Marketplace</a>>
+<title>Help & Support</title>
 
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
-font-family:Arial;
-background:#f5f6f8;
-margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f6f8;
 }
 
 .container{
-max-width:700px;
-margin:40px auto;
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    max-width:1000px;
+    margin:30px auto;
+    padding:20px;
 }
 
-h2{
-margin-bottom:15px;
+.back-btn{
+    display:inline-block;
+    background:#2e7d32;
+    color:white;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:600;
+    margin-bottom:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
 }
 
-.faq{
-margin-bottom:15px;
+.back-btn:hover{
+    background:#1b5e20;
+}
+
+.header{
+    background:linear-gradient(135deg,#2e7d32,#43a047);
+    color:white;
+    text-align:center;
+    padding:35px;
+    border-radius:18px;
+    margin-bottom:25px;
+}
+
+.header h1{
+    margin-top:10px;
+}
+
+.header-icon{
+    font-size:60px;
+}
+
+.faq-card{
+    background:white;
+    padding:20px;
+    margin-bottom:15px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
 .question{
-font-weight:bold;
+    font-weight:bold;
+    color:#2e7d32;
+    margin-bottom:8px;
+    font-size:17px;
 }
 
 .answer{
-color:#555;
-margin-top:5px;
+    color:#555;
+    line-height:1.6;
 }
+
+.support-card{
+    background:white;
+    margin-top:25px;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.support-card h3{
+    color:#2e7d32;
+    margin-bottom:15px;
+}
+
+.contact{
+    margin-bottom:10px;
+    font-size:16px;
+}
+
+.ticket-btn{
+    display:inline-block;
+    margin-top:15px;
+    background:#2e7d32;
+    color:white;
+    text-decoration:none;
+    padding:12px 25px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.ticket-btn:hover{
+    background:#1b5e20;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<h2>❓ Help & Support</h2>
+<a href="{{ url_for('distributor.marketplace') }}" class="back-btn">
+🏠 Back to Dashboard
+</a>
 
-<div class="faq">
-<div class="question">How to place an order?</div>
-<div class="answer">Browse products → click Add → go to Cart → Checkout.</div>
+<div class="header">
+<div class="header-icon">❓</div>
+<h1>Help & Support</h1>
+<p>We're here to help you use BeejMitra efficiently</p>
 </div>
 
-<div class="faq">
-<div class="question">How to change password?</div>
-<div class="answer">Go to Profile → Security → Update password.</div>
+<div class="faq-card">
+<div class="question">🛒 How to place an order?</div>
+<div class="answer">
+Browse products → Add to Cart → Open Cart → Checkout → Complete Payment.
+</div>
 </div>
 
-<div class="faq">
-<div class="question">How to contact support?</div>
-<div class="answer">Email: support@beejmitra.com</div>
+<div class="faq-card">
+<div class="question">🔒 How to change password?</div>
+<div class="answer">
+Go to Profile → Security Settings → Enter New Password → Save.
+</div>
 </div>
 
-<div class="faq">
-<div class="question">How to delete account?</div>
-<div class="answer">Go to Profile → Delete Account.</div>
+<div class="faq-card">
+<div class="question">📦 Where can I see previous orders?</div>
+<div class="answer">
+Open Profile → Order History to view all your orders.
+</div>
+</div>
+
+<div class="faq-card">
+<div class="question">❌ How to logout?</div>
+<div class="answer">
+Open Profile Menu and click Logout.
+</div>
+</div>
+
+<div class="support-card">
+
+<h3>📞 Contact Support</h3>
+
+<div class="contact">
+☎ Phone: +91 9876543210
+</div>
+
+<div class="contact">
+📧 Email: support@beejmitra.com
+</div>
+
+<div class="contact">
+🕒 Support Hours: 9 AM – 6 PM
+</div>
+
+<a href="#" class="ticket-btn">
+🎫 Raise Support Ticket
+</a>
+
 </div>
 
 </div>

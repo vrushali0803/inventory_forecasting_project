@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-
 body{
 margin:0;
 font-family:Arial;
@@ -32,7 +31,6 @@ font-weight:bold;
 color:#2e7d32;
 }
 
-/* SEARCH */
 .search input{
 padding:8px 14px;
 border-radius:20px;
@@ -40,14 +38,12 @@ border:1px solid #ccc;
 width:260px;
 }
 
-/* RIGHT SECTION */
 .right{
 display:flex;
 gap:20px;
 align-items:center;
 }
 
-/* CART */
 .cart{
 position:relative;
 cursor:pointer;
@@ -64,36 +60,12 @@ padding:2px 6px;
 border-radius:50%;
 }
 
-/* PROFILE */
-.profile{
+.menu-btn{
+font-size:20px;
 cursor:pointer;
-position:relative;
 }
 
-.dropdown{
-display:none;
-position:absolute;
-right:0;
-top:30px;
-background:white;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
-border-radius:10px;
-padding:10px;
-width:180px;
-}
-
-.dropdown a{
-display:block;
-padding:6px;
-text-decoration:none;
-color:black;
-}
-
-.profile:hover .dropdown{
-display:block;
-}
-
-/* TAGLINE (MOVING) */
+/* TAGLINE */
 .tagline{
 background:#2e7d32;
 color:white;
@@ -112,49 +84,67 @@ animation:scroll 10s linear infinite;
 100%{transform:translateX(-100%);}
 }
 
-/* CATEGORY CENTERED */
-.categories-icons{
-display:flex;
-justify-content:center;
-gap:25px;
-padding:20px;
-flex-wrap:wrap;
+.categories-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 25px 10px;
+    flex-wrap: wrap;
 }
 
-.cat-icon{
-text-align:center;
-cursor:pointer;
-padding:10px;
-border-radius:50%;
-background:white;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
-transition:0.3s;
-width:90px;
-height:90px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+.cat-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden; /* IMPORTANT */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    cursor: pointer;
+    background: #eee;
+    position: relative;
+
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
 }
 
-.cat-icon img{
-width:50px;
-height:50px;
-border-radius:12%;
-object-fit:cover;
+/* IMAGE FULL FIT */
+.cat-icon img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
 }
 
-.cat-icon p{
-margin:5px 0 0;
-font-size:12px;
+/* TEXT OVER IMAGE */
+.cat-icon p {
+    position: relative;
+    z-index: 2;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    margin: 0;
+    padding: 4px 0;
 }
 
-.cat-icon.active{
-background:#2e7d32;
-color:white;
+/* HOVER */
+.cat-icon:hover {
+    transform: translateY(-5px);
 }
 
-/* GRID */
+/* ACTIVE */
+.cat-icon.active {
+    outline: 3px solid #2e7d32;
+}
+
+/* PRODUCTS */
 .container{
 padding:20px 40px;
 }
@@ -165,7 +155,6 @@ grid-template-columns:repeat(4,1fr);
 gap:20px;
 }
 
-/* CARD */
 .card{
 background:white;
 padding:12px;
@@ -200,18 +189,16 @@ font-weight:bold;
 margin:6px 0;
 }
 
-/* BUTTON */
 .add-btn{
 width:100%;
 padding:8px;
 border:none;
 background:#2e7d32;
 color:white;
-border-radius:6px;
+border-radius:20px;
 cursor:pointer;
 }
 
-/* QTY */
 .qty-box{
 display:none;
 justify-content:center;
@@ -227,85 +214,132 @@ padding:5px 10px;
 border-radius:5px;
 }
 
-/* MENU BUTTON */
-.menu-btn{
-font-size:20px;
+/* CHATBOT */
+#chatbot-btn{
+position:fixed;
+bottom:20px;
+right:20px;
+width:55px;
+height:55px;
+background:#2e7d32;
+color:white;
+font-size:24px;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:50%;
 cursor:pointer;
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+z-index:999;
+transition:0.3s;
 }
 
-/* ===== PREMIUM SIDEBAR ===== */
+#chatbot-btn:hover{
+background:#1b5e20;
+transform:scale(1.1);
+}
+/* ==========================
+   SIDE MENU
+========================== */
 
-#sidebar{
-    position:fixed;
-    top:0;
-    right:-300px;
-    width:280px;
-    height:100%;
-    background:#ffffff;
-    box-shadow:-4px 0 20px rgba(0,0,0,0.15);
-    transition:0.3s ease;
-    z-index:1000;
-    border-radius:12px 0 0 12px;
-    padding:10px 0;
+#sideMenu{
+
+position:fixed;
+top:0;
+right:-320px;
+
+width:300px;
+height:100%;
+
+background:white;
+
+box-shadow:
+-5px 0 20px rgba(0,0,0,0.2);
+
+z-index:99999;
+
+transition:.3s ease;
+
+display:flex;
+flex-direction:column;
 }
 
-#sidebar.active{
-    right:0;
+#sideMenu.active{
+right:0;
 }
 
-/* Header */
-#sidebar h3{
-    padding:15px 20px;
-    border-bottom:1px solid #eee;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.menu-header{
+
+padding:20px;
+
+background:#2e7d32;
+color:white;
+
+font-size:20px;
+font-weight:bold;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-/* Links */
-#sidebar a{
-    display:block;
-    padding:14px 20px;
-    text-decoration:none;
-    color:#333;
-    font-size:15px;
-    transition:0.2s;
+.menu-header span{
+cursor:pointer;
+font-size:22px;
 }
 
-#sidebar a:hover{
-    background:#f5f5f5;
-    color:#2e7d32;
+#sideMenu a{
+
+padding:16px 20px;
+
+text-decoration:none;
+color:#333;
+
+border-bottom:
+1px solid #eee;
+
+transition:.2s;
 }
 
-/* Logout special */
-#sidebar a:last-child{
-    border-top:1px solid #eee;
-    margin-top:10px;
-}
-<div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+#sideMenu a:hover{
 
-/* OVERLAY */
-.overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.3);
-    display:none;
-    z-index:999;
+background:#f4f4f4;
 }
 
-.overlay.active{
-    display:block;
+.logout-link{
+
+color:#d32f2f !important;
+font-weight:bold;
+}
+
+#menuOverlay{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:
+rgba(0,0,0,.4);
+
+display:none;
+
+z-index:99998;
+}
+
+#menuOverlay.active{
+display:block;
 }
 </style>
 </head>
 
+
 <body>
 
 <div class="header">
-
 <div class="logo">🌱 BeejMitra</div>
 
 <div class="search">
@@ -313,44 +347,21 @@ cursor:pointer;
 </div>
 
 <div class="right">
-
 <div class="cart" onclick="window.location.href='{{ url_for('distributor.view_cart') }}'">
 <i class="fa fa-shopping-cart"></i>
 <span class="badge">{{ cart_count }}</span>
 </div>
 
-<div class="menu-btn" onclick="openSidebar()">
+<div class="menu-btn" onclick="openMenu()">
 <i class="fa fa-bars"></i>
 </div>
-
+</div>
 </div>
 
-<div id="sidebar" class="sidebar">
-
-<div class="sidebar-header">
-<span>👤 My Account</span>
-<i class="fa fa-times" onclick="closeSidebar()"></i>
-</div>
-
-<a href="{{ url_for('distributor.orders') }}">📦 Order History</a>
-<a href="{{ url_for('distributor.security') }}">🔐 Security</a>
-<a href="{{ url_for('distributor.help_page') }}">❓ Help</a>
-<a href="{{ url_for('distributor.delete_account') }}">⚠ Delete Account</a>
-
-<hr>
-
-<a href="{{ url_for('auth.logout') }}">🚪 Logout</a>
-
-</div>
-
-<div id="overlay" class="overlay" onclick="closeSidebar()"></div>
-
-</div>
-
-<!-- TAGLINE -->
 <div class="tagline">
 <span>🌱 High Yield Seeds | Smart Farming Starts Here | BeejMitra 🌾</span>
 </div>
+
 
 <!-- CATEGORY -->
 <div class="categories-icons">
@@ -382,12 +393,11 @@ cursor:pointer;
 
 </div>
 
-<!-- GRID -->
+<!-- PRODUCTS -->
 <div class="container">
 <div class="grid">
 
 {% for product in products %}
-
 <div class="card" data-category="{{ product.category }}">
 
 <img src="{{ url_for('static', filename=product.image_path) }}">
@@ -400,34 +410,66 @@ cursor:pointer;
 <div class="price">₹ {{ product.price }}</div>
 
 <form method="POST" action="{{ url_for('distributor.add_to_cart') }}">
-
 <input type="hidden" name="product_id" value="{{ product.id }}">
 <input type="hidden" name="quantity" value="1" class="qty">
 
-<button type="button" class="add-btn" onclick="addItem(this)">Add</button>
+<button type="button" class="add-btn" onclick="addItem(this)">Add to Cart</button>
 
 <div class="qty-box">
 <button type="button" onclick="changeQty(this,-1)">-</button>
 <span>1</span>
 <button type="button" onclick="changeQty(this,1)">+</button>
-<button type="submit" style="background:#ff9800;border:none;padding:5px 10px;border-radius:5px;color:white;">✔</button>
+<button type="submit" style="background:#ff9800;color:white;">✔</button>
 </div>
 
 </form>
 
 </div>
-
 {% endfor %}
 
 </div>
 </div>
+<!-- SIDE MENU -->
+
+<div id="sideMenu">
+
+<div class="menu-header">
+🌱 BeejMitra
+<span onclick="closeMenu()">✖</span>
+</div>
+
+<a href="{{ url_for('distributor.profile') }}">
+👤 Profile
+</a>
+
+<a href="{{ url_for('distributor.orders') }}">
+📦 Order History
+</a>
+
+<a href="{{ url_for('distributor.security') }}">
+🔒 Security
+</a>
+
+<a href="{{ url_for('distributor.help_page') }}">
+❓ Help & Support
+</a>
+
+<a href="{{ url_for('auth.logout') }}" class="logout-link">
+🚪 Logout
+</a>
+
+</div>
+
+<div id="menuOverlay"
+onclick="closeMenu()">
+</div>
+
+{% include 'components/chatbot.html' %}
 
 <script>
-
 function addItem(btn){
 btn.style.display="none";
-let box=btn.parentElement.querySelector(".qty-box");
-box.style.display="flex";
+btn.parentElement.querySelector(".qty-box").style.display="flex";
 }
 
 function changeQty(btn,change){
@@ -450,12 +492,7 @@ el.classList.add("active");
 
 document.querySelectorAll(".card").forEach(c=>{
 let category=c.getAttribute("data-category");
-
-if(cat==="all" || category===cat){
-c.style.display="block";
-}else{
-c.style.display="none";
-}
+c.style.display=(cat==="all" || category===cat)?"block":"none";
 });
 }
 
@@ -464,18 +501,28 @@ document.querySelectorAll(".card").forEach(c=>{
 c.style.display=c.innerText.toLowerCase().includes(val.toLowerCase())?"block":"none";
 });
 }
+function openMenu(){
 
-function openSidebar(){
-    document.getElementById("sidebar").classList.add("active");
-    document.getElementById("overlay").classList.add("active");
+document
+.getElementById("sideMenu")
+.classList.add("active");
+
+document
+.getElementById("menuOverlay")
+.classList.add("active");
 }
 
-function closeSidebar(){
-    document.getElementById("sidebar").classList.remove("active");
-    document.getElementById("overlay").classList.remove("active");
+function closeMenu(){
+
+document
+.getElementById("sideMenu")
+.classList.remove("active");
+
+document
+.getElementById("menuOverlay")
+.classList.remove("active");
 }
 </script>
-
 
 </body>
 </html>
